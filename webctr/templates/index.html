@@ -1,0 +1,57 @@
+<html>
+<body> 
+	<h1> hello from a template </h1>
+<button onclick="myF_30()" id='bbl'> left</button>
+<button onclick="myF_m30()" id='bbr'> right</button>
+
+<div id="slidecontainer">
+  <input type="range" min="-75" max="75" value="0" class="slider" id="angRange" onmouseup="rangeMouseUp()">
+</div>
+
+<div id='SpeedSlider'>
+	<input type="range" min="0" max="756" value="0" class="slider" id="spdRange" onmouseup="rangeMouseUp()">
+</div>
+
+<p id='bb1'>  </p>
+
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+	
+	function myF_30() {
+		var data_ = {'angle': '31'};
+		$.post(
+			"receiver", 
+			{ angle: '30', speed: '150'},
+		function(data, status){
+			document.getElementById('bb1').innerHTML = "Data: " + data + "\nStatus: " + status;
+			})
+	}
+
+
+	function myF_m30() {
+		$.post(
+			"receiver", 
+			{ angle: '-30', speed: '150'},
+		function(data, status){
+			document.getElementById('bb1').innerHTML = "Data: " + data + "\nStatus: " + status;
+			})
+
+	}
+
+	function rangeMouseUp(){
+		var ang = document.getElementById('angRange').value;
+		var spd = document.getElementById('spdRange').value;
+		console.log(ang);
+		console.log(spd);
+		$.post(
+			"receiver", 
+			{ angle: ''+ang, speed: ''+spd},
+		function(data, status){
+			document.getElementById('bb1').innerHTML = "Data: " + data + "\nStatus: " + status;
+			})
+
+	}
+
+</script>
+</body>
+</html>
